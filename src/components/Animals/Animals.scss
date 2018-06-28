@@ -1,3 +1,16 @@
 .Animals {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+  overflow: scroll;
   background-color: white;
+
+  .animalHolder{
+    padding: 5px;
+
+    img {
+      max-width: 90%;
+    }
+  }
 }
