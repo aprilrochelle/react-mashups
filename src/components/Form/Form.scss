@@ -1,3 +1,6 @@
+@import 'styles/_colors';
+
 .Form {
-  background-color: cyan;
+  background-color: $brightblue;
+  color: $light;
 }
