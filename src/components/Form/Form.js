@@ -17,17 +17,42 @@ class Form extends React.Component {
     newAnimal: animalDefault,
   }
 
+  formFieldStringState = (name, e) => {
+    const tempAnimal = {...this.state.newAnimal};
+    tempAnimal[name] = e.target.value;
+    this.setState({newAnimal: tempAnimal});
+  }
+
+  nameChange = e => {
+    this.formFieldStringState('name', e);
+  }
+
+  imgUrlChange = e => {
+    this.formFieldStringState('imgUrl', e);
+  }
+
+  descriptionChange = e => {
+    this.formFieldStringState('description', e);
+  }
+
   formSubmit = (e) => {
     const { onSubmit } = this.props;
     const { newAnimal } = this.state;
     e.preventDefault();
-    onSubmit(this.state.newAnimal);
-    this.setState({ newAnimal: animalDefault });
+    if (
+      newAnimal.name &&
+      newAnimal.imgUrl &&
+      newAnimal.description
+    ) {
+      onSubmit(this.state.newAnimal);
+      this.setState({ newAnimal: animalDefault });
+    } else {
+      alert('Please fill in all fields.');
+    }
   }
 
   render () {
     const { newAnimal } = this.state;
-
     return (
       <div className="Form">
         <h3>Add an Animal</h3>
@@ -42,6 +67,7 @@ class Form extends React.Component {
                 id="name"
                 placeholder="Name"
                 value={newAnimal.name}
+                onChange={this.nameChange}
               />
             </fieldset>
           </div>
@@ -55,6 +81,7 @@ class Form extends React.Component {
                 id="imgUrl"
                 placeholder="Image URL"
                 value={newAnimal.imgUrl}
+                onChange={this.imgUrlChange}
               />
             </fieldset>
           </div>
@@ -68,6 +95,7 @@ class Form extends React.Component {
                 id="description"
                 placeholder="Animal's Description"
                 value={newAnimal.description}
+                onChange={this.descriptionChange}
               />
             </fieldset>
           </div>
