@@ -1,16 +1,23 @@
+@import 'styles/_colors';
+
 .Animals {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
   height: 100vh;
   overflow: scroll;
-  background-color: white;
 
   .animalHolder{
-    padding: 5px;
+    background-color: $light;
+    padding: 10px;
+    height: 325px;
+    width: 30%;
+    margin: 1%;
+    border: 2px solid $brightblue;
 
     img {
       max-width: 90%;
+      max-height: 200px;
     }
   }
 }

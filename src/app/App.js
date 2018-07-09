@@ -1,7 +1,7 @@
 import React from 'react';
 
 import connection from '../firebaseRequests/connection';
-import animalRequests from '../firebaseRequests/getAnimals';
+import {getAnimals, postAnimal} from '../firebaseRequests/getAnimals';
 import Animals from '../components/Animals/Animals';
 import Form from '../components/Form/Form';
 
@@ -13,9 +13,22 @@ class App extends React.Component {
     animalz: [],
   }
 
+  formSubmitEvent = (animal) => {
+    postAnimal(animal)
+      .then(() => {
+        getAnimals()
+          .then((animalz) => {
+            this.setState({animalz});
+          });
+      })
+      .catch((err) => {
+        console.error('error with posting animal', err);
+      });
+  }
+
   componentDidMount () {
     connection();
-    animalRequests()
+    getAnimals()
       .then((animalz) => {
         this.setState({animalz});
       })
@@ -31,7 +44,7 @@ class App extends React.Component {
           <Animals animalz={this.state.animalz}/>
         </div>
         <div className="col-md-4">
-          <Form />
+          <Form onSubmit={this.formSubmitEvent}/>
         </div>
       </div>
     );
