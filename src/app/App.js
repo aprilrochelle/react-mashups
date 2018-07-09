@@ -17,8 +17,8 @@ class App extends React.Component {
     postAnimal(animal)
       .then(() => {
         getAnimals()
-          .then((animals) => {
-            this.setState({animals});
+          .then((animalz) => {
+            this.setState({animalz});
           });
       })
       .catch((err) => {
